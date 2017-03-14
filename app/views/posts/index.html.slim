@@ -1,0 +1,32 @@
+h1 Search By Content
+
+= form_tag '', method: 'get' do
+  = text_field_tag :search, params[:search]
+  = submit_tag "Search", :name => nil
+
+
+h1 Listing posts
+
+table
+  thead
+    tr
+      th Nick
+      th Title
+      th Content
+      th
+      th
+      th
+
+  tbody
+    - @posts.each do |post|
+      tr
+        td = post.nick
+        td = post.title.html_safe
+        td = raw post.content
+        td = link_to 'Show', post
+        td = link_to 'Edit', edit_post_path(post)
+        td = link_to 'Destroy', post, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Post', new_post_path
